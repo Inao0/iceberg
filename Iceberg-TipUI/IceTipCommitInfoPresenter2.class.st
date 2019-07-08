@@ -1,11 +1,6 @@
-"
-I'm a panel to show the history of a commitish (usually a branch or a tag). I display infos on it and diffs.
-
-I'm usually used as part of an IceTipHistoryBrowser.
-"
 Class {
-	#name : #IceTipCommitInfoPresenter,
-	#superclass : #ComposablePresenter,
+	#name : #IceTipCommitInfoPresenter2,
+	#superclass : #SpPresenter,
 	#instVars : [
 		'model',
 		'selectedModel',
@@ -20,62 +15,61 @@ Class {
 }
 
 { #category : #specs }
-IceTipCommitInfoPresenter class >> defaultSpec [
+IceTipCommitInfoPresenter2 class >> defaultSpec [
 	<spec: #default>
-	
-	^ SpecBoxLayout newVertical
+	^ SpBoxLayout newVertical
 		add: #notebookPanel;
 		yourself
 ]
 
 { #category : #examples }
-IceTipCommitInfoPresenter class >> example [ <example>
+IceTipCommitInfoPresenter2 class >> example [ <example>
 ^self new openWithSpec 
 ]
 
 { #category : #accessing }
-IceTipCommitInfoPresenter >> beForCommit [
+IceTipCommitInfoPresenter2 >> beForCommit [
 
 	headTabContainer := IceTipHistoryDiffFromHead tab: headPage.
 	ancestorTabContainer := IceTipHistoryDiffToAncestor tab: ancestorPage
 ]
 
 { #category : #accessing }
-IceTipCommitInfoPresenter >> beForMerge [
+IceTipCommitInfoPresenter2 >> beForMerge [
 
 	headTabContainer := IceTipHistoryDiffToHead tab: headPage.
 	ancestorTabContainer := IceTipHistoryDiffToAncestor tab: ancestorPage
 ]
 
 { #category : #private }
-IceTipCommitInfoPresenter >> commitInfo [
+IceTipCommitInfoPresenter2 >> commitInfo [
 
 	selectedModel ifNil: [ ^ self newEmpty ].
 	^ IceTipReadOnlyForm items: selectedModel info
 ]
 
 { #category : #private }
-IceTipCommitInfoPresenter >> diffFromAncestor [
+IceTipCommitInfoPresenter2 >> diffFromAncestor [
 	
 	selectedModel ifNil: [ ^ self newEmpty ].
 	^ IceTipDiffPanel on: (ancestorTabContainer diffFor: selectedModel)
 ]
 
 { #category : #private }
-IceTipCommitInfoPresenter >> diffFromHead [
+IceTipCommitInfoPresenter2 >> diffFromHead [
 	
 	selectedModel ifNil: [ ^ self newEmpty ].
 	^ IceTipDiffPanel on: (headTabContainer diffFor: selectedModel)
 ]
 
 { #category : #initialization }
-IceTipCommitInfoPresenter >> initialize [
+IceTipCommitInfoPresenter2 >> initialize [
 	self beForCommit.
 	super initialize
 ]
 
 { #category : #initialization }
-IceTipCommitInfoPresenter >> initializeCommitPanel [
+IceTipCommitInfoPresenter2 >> initializeCommitPanel [
 	"This will be initialised in fact on the first refresh"
 
 	notebookPanel
@@ -91,7 +85,7 @@ IceTipCommitInfoPresenter >> initializeCommitPanel [
 ]
 
 { #category : #initialization }
-IceTipCommitInfoPresenter >> initializeWidgets [
+IceTipCommitInfoPresenter2 >> initializeWidgets [
 
 	notebookPanel := self newNotebook.
 	self initializeCommitPanel.
@@ -100,7 +94,7 @@ IceTipCommitInfoPresenter >> initializeWidgets [
 ]
 
 { #category : #'private factory' }
-IceTipCommitInfoPresenter >> newDiffPage [
+IceTipCommitInfoPresenter2 >> newDiffPage [
 
 	^ NotebookPage 
 		title: 'Diff'
@@ -109,7 +103,7 @@ IceTipCommitInfoPresenter >> newDiffPage [
 ]
 
 { #category : #'private factory' }
-IceTipCommitInfoPresenter >> newDiffTab [
+IceTipCommitInfoPresenter2 >> newDiffTab [
 	^ self newTab 
 		label: 'Diff';
 		icon: (self iconNamed: #diff);
@@ -118,13 +112,13 @@ IceTipCommitInfoPresenter >> newDiffTab [
 ]
 
 { #category : #'private factory' }
-IceTipCommitInfoPresenter >> newEmpty [
+IceTipCommitInfoPresenter2 >> newEmpty [
 
 	^ (self instantiate: LabelPresenter) label: '(No commit selected)'
 ]
 
 { #category : #'private factory' }
-IceTipCommitInfoPresenter >> newEmptyTab [
+IceTipCommitInfoPresenter2 >> newEmptyTab [
 	^ self newTab 
 		label: 'Info';
 		icon: (self iconNamed: #smallQuestion);
@@ -134,7 +128,7 @@ IceTipCommitInfoPresenter >> newEmptyTab [
 ]
 
 { #category : #'private factory' }
-IceTipCommitInfoPresenter >> newInfoPage [
+IceTipCommitInfoPresenter2 >> newInfoPage [
 
 	^ NotebookPage 
 		title: 'Info'
@@ -143,7 +137,7 @@ IceTipCommitInfoPresenter >> newInfoPage [
 ]
 
 { #category : #'private factory' }
-IceTipCommitInfoPresenter >> newInfoTab [
+IceTipCommitInfoPresenter2 >> newInfoTab [
 	^ self newTab 
 		label: 'Info';
 		icon: (self iconNamed: #smallQuestion);
@@ -152,7 +146,7 @@ IceTipCommitInfoPresenter >> newInfoTab [
 ]
 
 { #category : #accessing }
-IceTipCommitInfoPresenter >> refresh [
+IceTipCommitInfoPresenter2 >> refresh [
 	
 	selectedModel ifNil: [ ^ self ].
 	
@@ -162,33 +156,33 @@ IceTipCommitInfoPresenter >> refresh [
 ]
 
 { #category : #private }
-IceTipCommitInfoPresenter >> refreshDiffFromAncestor [
+IceTipCommitInfoPresenter2 >> refreshDiffFromAncestor [
 	ancestorTabContainer updateContentsOn: selectedModel
 ]
 
 { #category : #private }
-IceTipCommitInfoPresenter >> refreshDiffFromAncestorLabel [
+IceTipCommitInfoPresenter2 >> refreshDiffFromAncestorLabel [
 	ancestorTabContainer updateLabelOn: selectedModel
 ]
 
 { #category : #private }
-IceTipCommitInfoPresenter >> refreshDiffFromHead [
+IceTipCommitInfoPresenter2 >> refreshDiffFromHead [
 	headTabContainer updateContentsOn: selectedModel
 ]
 
 { #category : #private }
-IceTipCommitInfoPresenter >> refreshDiffFromHeadLabel [
+IceTipCommitInfoPresenter2 >> refreshDiffFromHeadLabel [
 	headTabContainer updateLabelOn: selectedModel
 ]
 
 { #category : #accessing }
-IceTipCommitInfoPresenter >> selectedModel: aModel [
+IceTipCommitInfoPresenter2 >> selectedModel: aModel [
 
 	selectedModel := aModel.
 	self refresh
 ]
 
 { #category : #initialization }
-IceTipCommitInfoPresenter >> setModelBeforeInitialization: anObject [
+IceTipCommitInfoPresenter2 >> setModelBeforeInitialization: anObject [
 	model := anObject
 ]

@@ -26,7 +26,7 @@ IceGitHubRejectPullRequestModel class >> defaultSpec [
 			(SpBoxLayout newHorizontal
 				add: #messageLabel
 					withConstraints:
-						[ :constraints | constraints width: 80 currentWorld displayScaleFactor ];
+						[ :constraints | constraints width: 80 * self currentWorld displayScaleFactor ];
 				add: #messageText;
 				yourself);
 		add: #acceptButton
@@ -45,6 +45,12 @@ IceGitHubRejectPullRequestModel class >> defaultSpec [
 { #category : #accessing }
 IceGitHubRejectPullRequestModel class >> defaultType [
 	^ 'merge'
+]
+
+{ #category : #examples }
+IceGitHubRejectPullRequestModel class >> example [ 
+<example>
+^self new openWithSpec 
 ]
 
 { #category : #accessing }

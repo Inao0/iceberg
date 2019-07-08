@@ -80,6 +80,12 @@ IceGitHubPullRequestDetailModel class >> defaultSpec [
 		yourself
 ]
 
+{ #category : #examples }
+IceGitHubPullRequestDetailModel class >> example [
+<example>
+^self new openWithSpec
+]
+
 { #category : #'accessing ui' }
 IceGitHubPullRequestDetailModel >> authorLabel [
 	^ authorLabel

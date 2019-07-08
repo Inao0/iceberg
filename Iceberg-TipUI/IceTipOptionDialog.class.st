@@ -95,6 +95,12 @@ IceTipOptionDialog >> initialExtent [
 ]
 
 { #category : #initialization }
+IceTipOptionDialog >> initializeDialogWindow: aPresenter [
+	super initializeDialogWindow: aPresenter .
+	aPresenter okAction: [ self doAccept ]
+]
+
+{ #category : #initialization }
 IceTipOptionDialog >> initializeTypeList [
 	typeList
 		addColumn: ((SpImageTableColumn evaluated: #icon) width: 20);
@@ -114,13 +120,12 @@ IceTipOptionDialog >> initializeWidgets [
 
 { #category : #focus }
 IceTipOptionDialog >> refreshFocusOrder [
-	
 	self focusOrder
 		removeAll;
 		add: self typeList;
-		add: self selectedType;
-		add: acceptButton;
-		add: cancelButton
+		add: self selectedType
+"		add: acceptButton;
+		add: cancelButton"
 ]
 
 { #category : #private }
