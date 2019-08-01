@@ -45,12 +45,12 @@ IceTipCommitBrowserTest >> testFixesField [
 		assert: presenter commentPanel message
 		equals: 'my super commit message'.
 	presenter commentPanel fixesField number: 123456.
-	
+
 	self
 		assert: presenter commentPanel message
 		equals:
 			'my super commit message
-Fixes #123456'.
+Fixes #123456'
 ]
 
 { #category : #tests }
